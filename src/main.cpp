@@ -1,8 +1,15 @@
-#include <iostream>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <iostream>
 
 int main(void)
 {
+    /*
+    cd ./build
+    cmake ../ -G "MinGW Makefiles"
+    cmake --build .
+    */
+
     GLFWwindow* window;
 
     /* Initialize the library */
@@ -19,6 +26,16 @@ int main(void)
 
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
+
+    if (!gladLoadGL()) {
+        std::cout<<"Can`t load GLAD!"<<std::endl;
+        system("pause");
+        return -1;
+    }
+
+    std::cout<<"OpenGL "<<GLVersion.major<<"."<<GLVersion.minor<<std::endl;
+
+    glClearColor(0, 1, 0, 1);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
